@@ -1,0 +1,13 @@
+{
+    "tasks": [
+        {
+            "type": "npm",
+            "script": "build",
+            "path": "LOG_VIEW/",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}

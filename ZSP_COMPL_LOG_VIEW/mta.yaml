@@ -1,0 +1,58 @@
+_schema-version: "3.2"
+ID: ZSP_COMPL_LOG_VIEW
+version: 0.0.6
+modules:
+- name: zsp-compl-log-view-approuter
+  type: approuter.nodejs
+  path: zsp-compl-log-view-approuter
+  requires:
+  - name: ZSP_COMPL_LOG_VIEW_html_repo_runtime
+  - name: uaa_ZSP_COMPL_LOG_VIEW
+  parameters:
+    disk-quota: 256M
+    memory: 256M
+- name: ZSP_COMPL_LOG_VIEW_ui_deployer
+  type: com.sap.application.content
+  path: .
+  requires:
+  - name: ZSP_COMPL_LOG_VIEW_html_repo_host
+    parameters:
+      content-target: true
+  build-parameters:
+    build-result: resources
+    requires:
+    - artifacts:
+      - LOG_VIEW-content.zip
+      name: LOG_VIEW
+      target-path: resources/
+- name: LOG_VIEW
+  type: html5
+  path: LOG_VIEW
+  build-parameters:
+    builder: custom
+    commands:
+    - npm run build
+    supported-platforms: []
+resources:
+- name: ZSP_COMPL_LOG_VIEW_html_repo_runtime
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-plan: app-runtime
+- name: ZSP_COMPL_LOG_VIEW_html_repo_host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-plan: app-host
+- name: uaa_ZSP_COMPL_LOG_VIEW
+  type: org.cloudfoundry.managed-service
+  parameters:
+    path: ./xs-security.json
+    service: xsuaa
+    service-name: ZSP_COMPL_LOG_VIEW-xsuaa-service
+    service-plan: application
+build-parameters:
+  before-all:
+  - builder: custom
+    commands:
+    - npm install

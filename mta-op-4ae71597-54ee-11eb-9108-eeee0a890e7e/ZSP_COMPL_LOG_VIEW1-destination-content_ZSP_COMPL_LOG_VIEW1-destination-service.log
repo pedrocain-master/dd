@@ -1,0 +1,4 @@
+#2.0#2021 01 12 15:54:42.556#Z#DEBUG#com.sap.cloud.lm.sl.xs2.4ae71597-54ee-11eb-9108-eeee0a890e7e.ZSP_COMPL_LOG_VIEW1-destination-content_ZSP_COMPL_LOG_VIEW1-destination-service.synchronousContentDeployTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-6394###
+[SynchronousContentDeployStep] [ZSP_COMPL_LOG_VIEW1-destination-content] [INFO] Deploy finished successfully#
+
